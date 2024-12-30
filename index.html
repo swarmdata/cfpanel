@@ -223,16 +223,20 @@
           const text = await response.json(); // Get the response text
           responseMessage.textContent = text.message; // Display success message
           responseMessage.style.color = text.color;
+          responseMessage.style.texSshadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(0, 0, 0, 0.7); // Add text shadow
         } else {
           responseMessage.textContent = 'Error submitting feedback. Please try again.'; // Error message
           responseMessage.style.color = 'red';
+          responseMessage.style.texSshadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(0, 0, 0, 0.7);
         }
       } catch (error) {
         responseMessage.textContent = 'An error occurred. Please try again.'; // Network error
         responseMessage.style.color = 'red';
+        responseMessage.style.texSshadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(0, 0, 0, 0.7);
         console.error('Error:', error);
       }
     });
+
 
   </script>
 </body>
