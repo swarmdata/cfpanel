@@ -199,17 +199,26 @@
     // Handling form submission via AJAX
     document.getElementById('feedbackForm').addEventListener('submit', async function(event) {
       event.preventDefault(); // Prevent default form submission
-
+    
       const formData = new FormData(this); // Create FormData object from the form
+      const params = new URLSearchParams(); // Prepare URLSearchParams for x-www-form-urlencoded
+    
+      formData.forEach((value, key) => {
+        params.append(key, value); // Convert FormData to URLSearchParams format
+      });
+    
       const responseMessage = document.getElementById('responseMessage'); // Div to show response
-
+    
       try {
-        // Send the form data using the fetch API
+        // Send the form data using the fetch API with proper Content-Type
         const response = await fetch('http://multi-rewards.gl.at.ply.gg:53094/submit', {
           method: 'POST',
-          body: formData, // The form data goes in the body of the request
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', // Ensure correct content type
+          },
+          body: params, // Use URLSearchParams as the body
         });
-
+    
         if (response.ok) {
           const text = await response.json(); // Get the response text
           responseMessage.textContent = text.message; // Display success message
@@ -224,6 +233,7 @@
         console.error('Error:', error);
       }
     });
+
   </script>
 </body>
 </html>
